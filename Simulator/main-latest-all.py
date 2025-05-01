@@ -432,7 +432,7 @@ if __name__ == "__main__":
         Frame_choosen.append(rl.current_state)
 
         # Store frame number,iteration in csv file
-        savefile = open("/home/anyamanaska/Desktop/New-Archive/single/FnumVsIters7-30.csv","a")
+        savefile = open("../../FnumVsIters7-30.csv","a")
         savefile.write(str(tf)+","+str(rl.current_state)+"\n")
         savefile.close()
         
