@@ -22,7 +22,7 @@ class Verbose:
 
     vary_factor = 1
 
-    frame_dictionary = 0
+    frame_dictionary = 1
 
     each_action = 0
     state_action_Qtable = 0

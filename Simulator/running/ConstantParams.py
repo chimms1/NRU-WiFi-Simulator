@@ -5,17 +5,17 @@ class PARAMS:
     scene = 1
     numofLTEBS = 1
     numofWifiBS = 1
-    numofLTEUE = 5
-    numofWifiUE = 5
+    numofLTEUE = 30
+    numofWifiUE = 10
     
-    times_frames = 120000    # Simulate for this value x 10ms
+    times_frames = 80000    # Simulate for this value x 10ms
 
     vary_from = 40000
     vary_load = 1   # set this flag to vary the load in iterations
     vary_for_every = 40000    # Load will be changed for these many frame iterations
 
-    set_users_LTE  = [30,30]
-    set_users_Wifi = [5,5]
+    set_users_LTE  = [10]
+    set_users_Wifi = [30]
 
     vary_iterator = 0   # iterates in the set user list
     # decrease_factors = [0.5, 0.6, 0.7, 0.8, 0.9,1]
@@ -102,3 +102,5 @@ class PARAMS:
         return val_mWatt/1000
 
     # noise = get_dBm_from_Watt((get_Watt_from_dBm(PARAMS().temp_noise)*20*(10**6)))#convert to dbm from watt (get watt from dbm(temp_noise) *20*10^6)
+    
+# print(PARAMS().pTx_one_PRB/1.1)

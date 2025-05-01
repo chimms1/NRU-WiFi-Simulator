@@ -29,7 +29,7 @@ class learning:
     do_dyna = 0
 
     # Declare and initialize variables
-    k = 0.05
+    k = 1000
     Epsilon = 0
     LR = 0.05
     Gamma = 0.6
@@ -76,6 +76,7 @@ class learning:
     Q_Table = np.zeros([21,5],dtype = np.float64)
 
     T_Count = np.zeros([21,5],dtype = np.int64)
+    T_Table = np.zeros([21,5],dtype = np.float64)
 
     def ChoosePtoDecideAction(self):
         p = round(random.uniform(0,1),4)
@@ -120,9 +121,27 @@ class learning:
         #     reward = self.MappingFairness(Fairness)/(LTEPowerS*(1-U_LTE))
         # else:
         #     reward = self.MappingFairness(Fairness)/(LTEPowerS*(1-0.999999))
+        
+        
+#  a = (a - min(a)) / range;
 
-        reward = (self.MappingFairness(Fairness)/LTEPowerS)
-
+        reward0 = (self.MappingFairness(Fairness)/LTEPowerS)
+        
+        # F max map= 1 (J=1), LPXmin = 9.5e-07 => 10^7/8.6363
+        # F min map= -1 (J=0.5), LPXmax = 0.00133 => -1/0.00133
+        Pmin =  (-1/0.00133)
+        Pmax = ((10**7)/8.6363)
+        
+        range0 =  Pmax - Pmin
+        
+        reward = abs(reward0 - Pmin)/range0
+        
+        range2 = 1 - (-1);
+        
+        # reward = (reward01 * range2) + (-1);
+        
+        # print("Fairness: "+str(Fairness)+" Mapped Fairness: "+str(self.MappingFairness(Fairness)) + " PowerS: "+str(LTEPowerS) + " Reward: "+str(reward))
+        
         # fairness_weight = 0.3
         # utilization_weight = 0.2
         # power_consumption_weight = 0.5
@@ -141,7 +160,6 @@ class learning:
 
     def RewardBonusDynaQ(self):
 
-        # t = max(self.T_Count[self.previous_state])
         if self.current_action == -2:
             column = 3
         elif self.current_action == 2:
@@ -150,8 +168,10 @@ class learning:
             column = self.current_action+1
 
         t = self.T_Count[self.previous_state][column]
+        # t = self.T_Table[self.previous_state][column]
 
         return (self.k * math.sqrt(t))
+        # return (self.k * t)
     
     def getMaxAction(self):
 
@@ -240,11 +260,11 @@ class learning:
             
             current_reward = self.RewardFunction(Fairness, LTEPowerS, U_LTE, scene_params)
             
-            if current_reward<=0:
-                current_reward -= self.RewardBonusDynaQ()
+            if Fairness < 0.8:
+                current_reward -= abs(self.RewardBonusDynaQ())
             else:
-                current_reward += self.RewardBonusDynaQ()
-        
+                current_reward += abs(self.RewardBonusDynaQ())
+            # current_reward += self.RewardBonusDynaQ()
         
         else:
             current_reward = self.RewardFunction(Fairness, LTEPowerS, U_LTE, scene_params)
@@ -271,3 +291,15 @@ class learning:
 
         self.T_Count[self.current_state][self.current_action] = 0
         
+    def UpdateT_table(self,Fairness, LTEPowerS, U_LTE, scene_params,current_iteration):
+
+        current_reward = self.RewardFunction(Fairness, LTEPowerS, U_LTE, scene_params)
+
+        if self.current_action == -2:
+            column = 3
+        elif self.current_action == 2:
+            column = 4
+        else:
+            column = self.current_action+1
+
+        self.T_Table[self.previous_state][column] = current_reward

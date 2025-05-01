@@ -61,6 +61,15 @@ def printQtable(rl):
         for action in range(0,5):
             print("{:.4f}".format(rl.Q_Table[state][action]),end=" ")
         print("\n")
+        
+def printTtable(rl):
+    print("Final State: {}\n".format(rl.current_state))
+    print("\tBack     Stay   Front   Down     Up")
+    for state in range(0,21):
+        print(state," ==> ",end = " ")
+        for action in range(0,5):
+            print("{:.6f}".format(rl.T_Table[state][action]),end="  ")
+        print("\n")
 
 
 if __name__ == "__main__":
@@ -467,23 +476,42 @@ if __name__ == "__main__":
 
     for tf in tqdm(range(0,thisparams.times_frames)):
         
-        if tf>0 and tf%5000  == 0 and tf>=rl.exploration:
+        if tf>0 and tf%5000  == 0: # and tf>=rl.exploration:
             print("\n\nIteration: ",tf)
+            print("Qtable:")
             printQtable(rl)
             printArrowQtable(rl)
-
-        if tf>0 and tf%45000 == 0 and tf>=rl.exploration and rl.do_dyna == 1:
-            print("do_dyna set to 0")
-            rl.do_dyna = 0
+            print("epsilon is ",rl.Epsilon)
+            print("Do dyna is",rl.do_dyna)
+            print("T_Table:")
+            printTtable(rl)
         
-        if tf>0 and tf%1000 == 0 and tf>=thisparams.vary_from and rl.do_dyna == 1:
-            if rl.Epsilon+0.05<=0.90:
-                rl.Epsilon+=0.05
+        # If do dyna then print q table for every 500 iterations
+        if rl.do_dyna == 1 and tf % 500==0 and tf>rl.exploration:
+            print("\n\nIteration: ",tf)
+            # printQtable(rl)
+            printArrowQtable(rl)
+            printTtable(rl)
+            print("epsilon is ",rl.Epsilon)
+            print("Do dyna is",rl.do_dyna)
+            # printTtable(rl)
+        
+        if tf==55000 or tf==100000:
+            rl.do_dyna = 1
+            print("Do dyna is changed to ",rl.do_dyna)
+        # if tf>0 and tf%45000 == 0 and tf>=rl.exploration and rl.do_dyna == 1:
+        #     print("do_dyna set to 0")
+        #     rl.do_dyna = 0
+        
+        # if tf>0 and tf%1000 == 0 and tf>=thisparams.vary_from and rl.do_dyna == 1:
+        #     if rl.Epsilon+0.05<=0.90:
+        #         rl.Epsilon+=0.05
                 
-            print("Epsilon changed to: ",rl.Epsilon)
+            # print("Epsilon changed to: ",rl.Epsilon)
 
         # Do exploitation
-        if tf>rl.exploration and rl.do_dyna==0:
+        # if tf>rl.exploration and rl.do_dyna==0:
+        if tf>rl.exploration:
             rl.Epsilon = 0.90
         
         if tf>thisparams.vary_from:
@@ -504,10 +532,11 @@ if __name__ == "__main__":
         lbss[0].format = format[rl.current_frame]
         Frame_choosen.append(rl.current_state)
 
-        # Store frame number,iteration in csv file
-        savefile = open("/home/anyamanaska/Desktop/New-Archive/single/FnumVsIters21-25.csv","a")
-        savefile.write(str(tf)+","+str(rl.current_state)+"\n")
+        # Store frame number, iteration in CSV file
+        savefile = open("../../FnumVsIters21-25.csv", "a")
+        savefile.write(str(tf) + "," + str(rl.current_state) + "\n")
         savefile.close()
+
 
         if rl.current_action == 2 or rl.current_action == -2:
             thisparams.pTxLTE = rl.original_power/rl.current_pFactor
@@ -729,10 +758,14 @@ if __name__ == "__main__":
                         format_U_LTE = {}
                         format_power = {}
 
-                        rl.do_dyna = 0
-                        rl.Epsilon = 0.0
-
+                        rl.do_dyna = 1
+                        # rl.Epsilon = 0.0
+                        # rl.Q_Table = np.zeros([21,5],dtype = np.float64)
+                        
                         print("do_dyna set to ",rl.do_dyna)
+                        print("epsilon is ",rl.Epsilon)
+                        
+                        
 
                         printQtable(rl)
 
@@ -1074,6 +1107,7 @@ if __name__ == "__main__":
         format_power[rl.current_state] = LTEPowerS
 
         rl.UpdateQtable(frame_fairness, LTEPowerS,U_LTE, thisparams,tf)
+        rl.UpdateT_table(frame_fairness, LTEPowerS,U_LTE, thisparams,tf)
 
         # "This throughput calculation is only for one frame"
         # for the current frame
