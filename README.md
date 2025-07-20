@@ -90,7 +90,7 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-A Simulator built from scratch in Python to demonstrate various coexistence scenarios for LTE and WiFi topologies in unlicensed spectrum
+A Simulator built from scratch in Python to demonstrate various coexistence scenarios for NR-U and WiFi topologies in unlicensed spectrum
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
@@ -130,7 +130,7 @@ Instructions to set up the project locally
 1. Install Python from [official website](https://www.python.org/)
 2. Clone the repo
    ```sh
-   git clone https://github.com/chimms1/LTE-WiFi-Simulator.git
+   git clone https://github.com/chimms1/NRU-WiFi-Simulator.git
    ```
 3. Install Python packages (project dependencies)
    ```sh
@@ -152,8 +152,8 @@ All the entities are modeled into various classes
 2. Service class `Simulator/running/ServiceClass.py`: contains all the methods used to perform operations such as creating users, calculating resources, etc.
 3. Params class `Simulator/running/ConstantParams.py`: contains the parameters set by the user
 4. Verbose class `Simulator/running/Print.py`: contains the flags to print specific information and plot graphs.
-5. BaseStation class `Simulator/entities/BaseStation.py`: contains the class definition for LTE BS and Wi-Fi AP.
-6. UserEquipment class `Simulator/entities/UserEquipment.py`: contains the class definition for LTE and Wi-Fi User equipment
+5. BaseStation class `Simulator/entities/BaseStation.py`: contains the class definition for NR-U BS and Wi-Fi AP.
+6. UserEquipment class `Simulator/entities/UserEquipment.py`: contains the class definition for NR-U and Wi-Fi User equipment
 7. Learning class `Simulator/Qlearning/learning.py`: contains the class definition for Q-learning (reward function, QTable operation, Actions, etc)
 
 
@@ -169,7 +169,7 @@ python main-latest-all.py <seed-value>
 6. Setting a seed value will help in recreating UE deployments.
 
 ## NOTE
-1. Currently, only a single LTE BS and WiFi AP can be used.
+1. Currently, only a single NR-U BS and WiFi AP can be used.
 2. As of now load can be varied only once.
 3. Increasing users to more than 30 may cause a decrease in SINR.
 4. Exceptions are not handled in many cases.
@@ -257,15 +257,15 @@ Resources that we found helpful
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Chimms1/LTE-WiFi-Simulator.svg?style=for-the-badge
-[contributors-url]: https://github.com/chimms1/LTE-WiFi-Simulator/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/Chimms1/NRU-WiFi-Simulator.svg?style=for-the-badge
+[contributors-url]: https://github.com/chimms1/NRU-WiFi-Simulator/graphs/contributors
 <!-- [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
 [forks-url]: https://github.com/othneildrew/Best-README-Template/network/members -->
-[stars-shield]: https://img.shields.io/github/stars/Chimms1/LTE-WiFi-Simulator.svg?style=for-the-badge
-[stars-url]: https://github.com/chimms1/LTE-WiFi-Simulator/stargazers
+[stars-shield]: https://img.shields.io/github/stars/Chimms1/NRU-WiFi-Simulator.svg?style=for-the-badge
+[stars-url]: https://github.com/chimms1/NRU-WiFi-Simulator/stargazers
 
-[license-shield]: https://img.shields.io/github/license/Chimms1/LTE-WiFi-Simulator.svg?style=for-the-badge
-[license-url]: https://github.com/chimms1/LTE-WiFi-Simulator/blob/main/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/Chimms1/NRU-WiFi-Simulator.svg?style=for-the-badge
+[license-url]: https://github.com/chimms1/NRU-WiFi-Simulator/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://in.linkedin.com/in/yash-deshpande-410567270
 
