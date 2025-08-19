@@ -90,7 +90,10 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-A Simulator built from scratch in Python to demonstrate various coexistence scenarios for NR-U and WiFi topologies in unlicensed spectrum
+This project is a POC for our paper **"An Intelligent Q-Learning Approach for Energy-Efficient Channel Occupancy in NR-U Cellular Networks for Fair Unlicensed Spectrum Access"** 
+```
+```
+A Simulator developed from scratch in Python to demonstrate various coexistence scenarios for NR-U and WiFi topologies in unlicensed spectrum. <br><br>
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
@@ -98,20 +101,16 @@ A Simulator built from scratch in Python to demonstrate various coexistence scen
 
 ### Built With
 
-<!-- * [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url] -->
-
-
-
 
 [![Python][python.com]][python-url]
+![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
+![tqdm](https://img.shields.io/badge/tqdm-%23FFD43B.svg?style=for-the-badge&logo=python&logoColor=black)
+![Seaborn](https://img.shields.io/badge/seaborn-%2300CED1.svg?style=for-the-badge&logoColor=white)
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![Linux](https://img.shields.io/badge/linux-%23000000.svg?style=for-the-badge&logo=linux&logoColor=white)
+![VSCodium](https://img.shields.io/badge/VSCodium-%23007ACC.svg?style=for-the-badge&logo=vscodium&logoColor=white)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -144,21 +143,28 @@ Instructions to set up the project locally
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+### Branch Info
+1. `main`: has contents of rl-dfs branch
+2. `rl-dfs`: Contains algorithm with 7 states for Q-Learning based Dynamic COT Optimization.
+3. `dyna-q`: Contains algorithm with 21 states for  Q-Learning Based Energy-Efficient COT Optimization. Load change can be toggled in `ConstantParams` and be used with Dyna-Q+.
+4. `Power-State`: (Deprecated, use dyna-q branch) Contains algorithm with 21 states for energy efficient Dynamic Frame Selection based on Q-Learning. 
+5. `CSMA/CA`: Development branch used to test implementation of CSMA/CA algorithm present in main file.
+6. `dev-y`: Development branch, used for implementation and testing.
 
 ### Classes and Files
-All the entities are modeled into various classes
+All the network entities are modeled into various classes
 
 1. Main class `Simulator/main-latest-all.py`: this is the main file that runs the simulation
-2. Service class `Simulator/running/ServiceClass.py`: contains all the methods used to perform operations such as creating users, calculating resources, etc.
-3. Params class `Simulator/running/ConstantParams.py`: contains the parameters set by the user
+2. Service class `Simulator/running/ServiceClass.py`: contains all the methods used to perform operations such as creating users, calculating resources and many more.
+3. Params class `Simulator/running/ConstantParams.py`: contains the parameters set by the user.
 4. Verbose class `Simulator/running/Print.py`: contains the flags to print specific information and plot graphs.
 5. BaseStation class `Simulator/entities/BaseStation.py`: contains the class definition for NR-U BS and Wi-Fi AP.
 6. UserEquipment class `Simulator/entities/UserEquipment.py`: contains the class definition for NR-U and Wi-Fi User equipment
-7. Learning class `Simulator/Qlearning/learning.py`: contains the class definition for Q-learning (reward function, QTable operation, Actions, etc)
+7. Learning class `Simulator/Qlearning/learning.py`: contains the class definition for Q-learning (reward function, QTable operation, Actions)
 
 
 ### How to execute
-1. Set the desired number of users, Number of iterations, Noise, pTx, datarate profile, etc in `ConstantParams.py`
+1. Set the desired number of users, Number of iterations, Noise, pTx, datarate profile, etc in `ConstantParams.py`.
 2. Set exploration-exploitation iterations accordingly in `learning.py`
 3. Set flags in `Print.py` to print information.
 4. Do additional configurations if required.
@@ -168,22 +174,21 @@ python main-latest-all.py <seed-value>
  ```
 6. Setting a seed value will help in recreating UE deployments.
 
-## NOTE
+
+### NOTE
 1. Currently, only a single NR-U BS and WiFi AP can be used.
-2. As of now load can be varied only once.
-3. Increasing users to more than 30 may cause a decrease in SINR.
-4. Exceptions are not handled in many cases.
-5. Internal code may lack documentation in a few places.
-6. Complete research work done in this project is yet to be released
+2. Increasing users to more than 30 may cause a decrease in SINR.
+3. Exceptions are not handled in many cases.
+4. Internal code may lack documentation in a few places.
+5. Complete research work done in this project will be published in 2025-26.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Branch Info
-1. `main`: has contents of rl-dfs
-2. `rl-dfs`: Contains algorithm with 7 states for Dynamic Frame Selection based on Q-Learning
-3. `Power-State`: Contains algorithm with 21 states for energy efficient Dynamic Frame Selection based on Q-Learning
-4. `dyna-q`: Contains algorithm with 21 states for energy efficient Dynamic Frame Selection based on Dyna-Q+
-5. `CSMA/CA`: Development branch used to test implementation of CSMA/CA algorithm present in main file.
-6. `dev-y`: Development branch, used for implementation and testing
+### Results Generated from Experiments
+
+The experiment setups and their accumulated data are present in the directory `Results-Generation` in `main` branch.
+
+
 <!-- ROADMAP -->
 <!-- ## Roadmap
 
@@ -229,8 +234,9 @@ Distributed under the LGPL-2.1 License. See `LICENSE.txt` for more information.
 
 
 <!-- CONTACT -->
-## Developed by
+## Contributed by
 
+Supervisor: Dr. Vijeth Kotagi
 * Yash Deshpande
 * Shreyas Joshi
 * Ramita Commi
@@ -267,7 +273,7 @@ Resources that we found helpful
 [license-shield]: https://img.shields.io/github/license/Chimms1/NRU-WiFi-Simulator.svg?style=for-the-badge
 [license-url]: https://github.com/chimms1/NRU-WiFi-Simulator/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://in.linkedin.com/in/yash-deshpande-410567270
+<!-- [linkedin-url]: https://in.linkedin.com/in/yash-deshpande-410567270 -->
 
 
 
@@ -280,19 +286,4 @@ Resources that we found helpful
 
 
 [product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com
+
