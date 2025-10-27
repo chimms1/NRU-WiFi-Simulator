@@ -227,7 +227,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the LGPL-2.1 License. See `LICENSE.txt` for more information.
+Distributed under the AGPL-3.0 License. See `LICENSE.txt` for more information.
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
